@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using PetStore;
+using System.Text.Json;
 
 namespace PetStore
 {
@@ -6,7 +7,9 @@ namespace PetStore
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Press 1 to add a product");
+			var productLogic = new ProductLogic();
+
+			Console.WriteLine("Press 1 to add a product or 2 to view a dogleash");
 			Console.WriteLine("Type 'exit' to quit");
 
 			string userInput = Console.ReadLine();
@@ -15,16 +18,27 @@ namespace PetStore
 			{
 				if (userInput.ToLower() == "1")
 				{
-					CatFood catFood = new();
-					Console.WriteLine("Type a name for catfood");
-					catFood.Name = Console.ReadLine();
-					Console.WriteLine("Type a price for catfood");
-					catFood.Price = decimal.Parse(Console.ReadLine());
+					DogLeash dogleash = new();
+					Console.WriteLine("Type a name for the dogleash");
+					dogleash.Name = Console.ReadLine();
+					Console.WriteLine("Type a price for the dogleash");
+					dogleash.Price = decimal.Parse(Console.ReadLine());
 
-					Console.WriteLine(JsonSerializer.Serialize(catFood));
+					productLogic.AddProduct(dogleash);
+					Console.WriteLine("Product added");
+
+					//var options = new JsonSerializerOptions { IncludeFields = true, WriteIndented = true };
+					//Console.WriteLine(JsonSerializer.Serialize(catFood));
+				}
+				else if (userInput == "2")
+				{
+					Console.WriteLine("Enter the name of the dogleash");
+					string name = Console.ReadLine();
+					DogLeash dogleash = productLogic.GetDogLeashByName(name);
+					Console.WriteLine(JsonSerializer.Serialize(dogleash));
 				}
 
-				Console.WriteLine("Press 1 to add a product");
+				Console.WriteLine("Press 1 to add a product or 2 to view a dogleash");
 				Console.WriteLine("Type 'exit' to quit");
 				userInput = Console.ReadLine();
 			}
