@@ -9,8 +9,8 @@ namespace PetStore
 		{
 			var productLogic = new ProductLogic();
 
-			Console.WriteLine("Press 1 to add a product or 2 to view a dogleash");
-			Console.WriteLine("Type 'exit' to quit");
+			Console.WriteLine("Press 1 to add a product or 2 to view a dogleash.");
+			Console.WriteLine("Type 'exit' to quit.");
 
 			string userInput = Console.ReadLine();
 
@@ -19,27 +19,35 @@ namespace PetStore
 				if (userInput.ToLower() == "1")
 				{
 					DogLeash dogleash = new();
-					Console.WriteLine("Type a name for the dogleash");
+					Console.WriteLine("Type a name for the dogleash:");
 					dogleash.Name = Console.ReadLine();
-					Console.WriteLine("Type a price for the dogleash");
+					Console.WriteLine("Type a price for the dogleash:");
 					dogleash.Price = decimal.Parse(Console.ReadLine());
 
 					productLogic.AddProduct(dogleash);
-					Console.WriteLine("Product added");
+					Console.WriteLine("Product added!");
 
 					//var options = new JsonSerializerOptions { IncludeFields = true, WriteIndented = true };
 					//Console.WriteLine(JsonSerializer.Serialize(catFood));
 				}
 				else if (userInput == "2")
 				{
-					Console.WriteLine("Enter the name of the dogleash");
+					Console.WriteLine("Enter the name of the dogleash:");
 					string name = Console.ReadLine();
 					DogLeash dogleash = productLogic.GetDogLeashByName(name);
-					Console.WriteLine(JsonSerializer.Serialize(dogleash));
+					if (dogleash != null)
+					{
+						Console.WriteLine(JsonSerializer.Serialize(dogleash));
+					}
+					else
+					{
+						Console.WriteLine("Product not found!");
+					}
+					
 				}
 
-				Console.WriteLine("Press 1 to add a product or 2 to view a dogleash");
-				Console.WriteLine("Type 'exit' to quit");
+				Console.WriteLine("\nPress 1 to add a product or 2 to view a dogleash.");
+				Console.WriteLine("Type 'exit' to quit.");
 				userInput = Console.ReadLine();
 			}
 		}

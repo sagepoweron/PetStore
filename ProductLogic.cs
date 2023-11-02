@@ -40,7 +40,15 @@ namespace PetStore
 
 		public DogLeash GetDogLeashByName(string name)
 		{
-			return _dogleashes[name];
+			try
+			{
+				return _dogleashes[name];
+			}
+			catch (Exception ex)
+			{
+				return null;
+			}
+			
 		}
 	}
 }
