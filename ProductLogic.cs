@@ -19,20 +19,35 @@ namespace PetStore
 			_catfood = new Dictionary<string, CatFood>();
 
 
-			DogLeash dogleash1 = new()
 			{
-				Name = "Popular Dog Leash",
-				Quantity = 0
-			};
-			AddProduct(dogleash1);
+				DogLeash dogleash = new()
+				{
+					Name = "Popular Dog Leash",
+					Quantity = 1,
+					Price = 10
+				};
+				AddProduct(dogleash);
+			}
 
-			DogLeash dogleash2 = new()
 			{
-				Name = "Common Dog Leash",
-				Quantity = 1
-			};
-			AddProduct(dogleash2);
+				DogLeash dogleash = new()
+				{
+					Name = "Common Dog Leash",
+					Quantity = 1,
+					Price = 1
+				};
+				AddProduct(dogleash);
+			}
 
+			{
+				DogLeash dogleash = new()
+				{
+					Name = "Rare Dog Leash",
+					Quantity = 0,
+					Price = 20
+				};
+				AddProduct(dogleash);
+			}
 		}
 
 		public void AddProduct(Product product)
@@ -69,7 +84,12 @@ namespace PetStore
 
 		public List<string> GetOnlyInStockProducts()
 		{
-			return _products.Where(x => x.Quantity > 0).Select(x => x.Name).ToList();
+			return _products.InStock().Select(x => x.Name).ToList();
+		}
+
+		public decimal GetTotalPriceOfInventory()
+		{
+			return _products.InStock().Select(x => x.Price).Sum();
 		}
 	}
 }

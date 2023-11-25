@@ -9,7 +9,7 @@ namespace PetStore
 		{
 			var productLogic = new ProductLogic();
 
-			Console.WriteLine("Press 1 to add a product, 2 to view a dogleash, or 3 to view in stock products.");
+			Console.WriteLine("Press 1 to add a product, 2 to view a dogleash, 3 to view in stock products, or 4 to get the total price of inventory.");
 			Console.WriteLine("Type 'exit' to quit.");
 
 			string userInput = Console.ReadLine();
@@ -57,8 +57,15 @@ namespace PetStore
 						Console.WriteLine(instockproducts[i]);
 					}
 				}
+				else if (userInput == "4")
+				{
+					Console.WriteLine("The total price of inventory is:");
+					decimal total = productLogic.GetTotalPriceOfInventory();
+					
+					Console.WriteLine(total);
+				}
 
-				Console.WriteLine("Press 1 to add a product, 2 to view a dogleash, or 3 to view in stock products.");
+				Console.WriteLine("Press 1 to add a product, 2 to view a dogleash, 3 to view in stock products, or 4 to get total price of inventory.");
 				Console.WriteLine("Type 'exit' to quit.");
 				userInput = Console.ReadLine();
 			}
