@@ -9,7 +9,7 @@ namespace PetStore
 		{
 			var productLogic = new ProductLogic();
 
-			Console.WriteLine("Press 1 to add a product or 2 to view a dogleash.");
+			Console.WriteLine("Press 1 to add a product, 2 to view a dogleash, or 3 to view in stock products.");
 			Console.WriteLine("Type 'exit' to quit.");
 
 			string userInput = Console.ReadLine();
@@ -23,6 +23,8 @@ namespace PetStore
 					dogleash.Name = Console.ReadLine();
 					Console.WriteLine("Type a price for the dogleash:");
 					dogleash.Price = decimal.Parse(Console.ReadLine());
+					Console.WriteLine("Type a quantity for the dogleash:");
+					dogleash.Quantity = int.Parse(Console.ReadLine());
 
 					productLogic.AddProduct(dogleash);
 					Console.WriteLine("Product added!");
@@ -45,8 +47,18 @@ namespace PetStore
 					}
 					
 				}
+				else if (userInput == "3")
+				{
+					Console.WriteLine("The following products are in stock:");
+					List<string> instockproducts = productLogic.GetOnlyInStockProducts();
 
-				Console.WriteLine("\nPress 1 to add a product or 2 to view a dogleash.");
+					for (int i = 0; i < instockproducts.Count; i++)
+					{
+						Console.WriteLine(instockproducts[i]);
+					}
+				}
+
+				Console.WriteLine("Press 1 to add a product, 2 to view a dogleash, or 3 to view in stock products.");
 				Console.WriteLine("Type 'exit' to quit.");
 				userInput = Console.ReadLine();
 			}

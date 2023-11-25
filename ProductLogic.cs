@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PetStore
 {
-	internal class ProductLogic
+	public class ProductLogic : IProductLogic
 	{
 		private List<Product> _products;
 		private Dictionary<string, DogLeash> _dogleashes;
@@ -17,6 +17,22 @@ namespace PetStore
 			_products = new List<Product>();
 			_dogleashes = new Dictionary<string, DogLeash>();
 			_catfood = new Dictionary<string, CatFood>();
+
+
+			DogLeash dogleash1 = new()
+			{
+				Name = "Popular Dog Leash",
+				Quantity = 0
+			};
+			AddProduct(dogleash1);
+
+			DogLeash dogleash2 = new()
+			{
+				Name = "Common Dog Leash",
+				Quantity = 1
+			};
+			AddProduct(dogleash2);
+
 		}
 
 		public void AddProduct(Product product)
@@ -49,6 +65,11 @@ namespace PetStore
 				return null;
 			}
 			
+		}
+
+		public List<string> GetOnlyInStockProducts()
+		{
+			return _products.Where(x => x.Quantity > 0).Select(x => x.Name).ToList();
 		}
 	}
 }
