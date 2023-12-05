@@ -1,4 +1,5 @@
 ﻿using PetStore.Products;
+using PetStore.Validators;
 
 namespace PetStore.Logic
 {
@@ -54,7 +55,18 @@ namespace PetStore.Logic
 		{
 			if (product is DogLeash dogleash)
 			{
-				_dogleashes.Add(dogleash.Name, dogleash);
+				DogLeashValidator validator = new();
+
+				if (validator.Validate(dogleash).IsValid)
+				{
+					_dogleashes.Add(dogleash.Name, dogleash);
+				}
+				else
+				{
+					throw new Exception("Not valid.");
+				}
+
+				
 			}
 			else if (product is CatFood catfood)
 			{
@@ -69,18 +81,43 @@ namespace PetStore.Logic
 			return _products;
 		}
 
-		public DogLeash GetDogLeashByName(string name)
+
+
+		public T GetProductByName<T>(string name) where T : Product
 		{
 			try
 			{
-				return _dogleashes[name];
+				if (typeof(T) == typeof(DogLeash))
+				{
+					return _dogleashes[name] as T;
+				}
+
+				if (typeof(T) == typeof(CatFood))
+				{
+					return _catfood[name] as T;
+				}
+
+				return null;
+				
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				return null;
 			}
-
 		}
+
+		//public DogLeash GetDogLeashByName(string name)
+		//{
+		//	try
+		//	{
+		//		return _dogleashes[name];
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		return null;
+		//	}
+
+		//}
 
 		public List<string> GetOnlyInStockProducts()
 		{
