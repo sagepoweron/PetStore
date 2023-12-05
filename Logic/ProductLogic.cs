@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PetStore.Products;
 
-namespace PetStore
+namespace PetStore.Logic
 {
 	public class ProductLogic : IProductLogic
 	{
@@ -13,12 +9,16 @@ namespace PetStore
 		private Dictionary<string, CatFood> _catfood;
 
 		public ProductLogic()
-        {
+		{
 			_products = new List<Product>();
 			_dogleashes = new Dictionary<string, DogLeash>();
 			_catfood = new Dictionary<string, CatFood>();
 
+			CreateDefaultProducts();
+		}
 
+		private void CreateDefaultProducts()
+		{
 			{
 				DogLeash dogleash = new()
 				{
@@ -79,7 +79,7 @@ namespace PetStore
 			{
 				return null;
 			}
-			
+
 		}
 
 		public List<string> GetOnlyInStockProducts()

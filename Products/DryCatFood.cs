@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PetStore
+namespace PetStore.Products
 {
-	public class CatFood : Product
-	{
-        public string Material { get; set; }
+    public class DryCatFood : CatFood
+    {
+        public double WeightPounds { get; set; }
     }
 }
